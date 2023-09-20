@@ -18,20 +18,29 @@ app.post("/weather", (req, res) => {
 
   const city = req.body.city;
   const apiKey = process.env.KEY;
-  const url = "https://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid="+ apiKey+"&units=metric";
+  const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
 
 
-  https.get(url,(response) => {
+  https.get(url, (response) => {
     response.on("data", (data) => {
-    const weatherInfo = JSON.parse(data);
+      const weatherInfo = JSON.parse(data);
       const temp = weatherInfo.main.temp;
       const des = weatherInfo.weather[0].description;
-const low = weatherInfo.main.temp_min;
+      const low = weatherInfo.main.temp_min;
       const high = weatherInfo.main.temp_max;
       const country = weatherInfo.sys.country
-      res.render("weather", {weatherCity: city, temperature: temp, weatherDes: des, date: formattedDate, higher: high, lower: low, country: country});
+      let status = response.statusCode;
+      if (status === 200) {
+        res.render("weather", { weatherCity: city, temperature: temp, weatherDes: des, date: formattedDate, higher: high, lower: low, country: country });
 
-  });
+      } else {
+        res.render("error");
+
+      }
+
+
+
+    });
 
 
   });

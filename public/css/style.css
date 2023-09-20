@@ -88,3 +88,18 @@ span {
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
 }
+h1.error {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  
+}
+p.error {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.7rem;
+}
+button.error {
+  font-family: 'Quicksand', sans-serif;
+  background: #a7ecce;
+  color: black;
+  font-size: 1.5rem;
+}
